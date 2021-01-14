@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
       end
     elsif @attendance.finished_at.nil?
       if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
-        flash[:info] = "お疲れさまでした。"
+        flash[:info] = "お疲れ様でした。"
       else
        flash[:danger] = UPDATE_ERROR_MSG 
       end
@@ -30,7 +30,12 @@ class AttendancesController < ApplicationController
   end
   
   def update_one_month
-  
   end
+  
+  private
+    
+    def attendances_params
+      params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+    end
 
 end
