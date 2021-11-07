@@ -10,7 +10,8 @@ class AttendancesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @attendance = Attendance.find(params[:id])
-    
+       attendances_params.each do |id, item| 
+       
     if @attendance.started_at.nil?
       if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
         flash[:info] = "おはようございます！"
@@ -32,19 +33,19 @@ class AttendancesController < ApplicationController
   
   def update_one_month
     ActiveRecord::Base.transaction do
-    if attendances_invalid?
-      attendances_params.each do |id, item| 
+    if attendances_invalid?attendances_params.each do |id, item| 
+      
         attendance = Attendance.find(id)
         attendance.update_attributes!(item)
     end
     flash[:success] = "１ヶ月分の勤怠情報を更新しました。"
     redirect_to user_url(date:params[:date])
-     else	
+   else
       flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"	
         redirect_to attendances_edit_one_month_user_url(date: params[:date])	
        end
      end
-    end
+  end
   
 
 
@@ -60,4 +61,5 @@ class AttendancesController < ApplicationController
       redirect_to(root_url)
     end
   end
+end
 end
