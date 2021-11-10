@@ -33,9 +33,9 @@ class AttendancesController < ApplicationController
   
   def update_one_month
     ActiveRecord::Base.transaction do
-    if attendances_invalid?attendances_params.each do |id, item| 
-      
-        attendance = Attendance.find(id)
+     if attendances_invalid?
+      attendances_params.each do |id, item| 
+       attendance = Attendance.find(id)
         attendance.update_attributes!(item)
     end
     flash[:success] = "１ヶ月分の勤怠情報を更新しました。"
