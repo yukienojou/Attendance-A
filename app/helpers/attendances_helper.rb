@@ -29,4 +29,13 @@ module AttendancesHelper
   def working_times(start, finish)
     format("%.2f", (((finish - start) / 60) / 60.0))
   end
+  
+  def css_class(wo)
+    case $days_of_the_week[wo.wday]
+    when '土'
+      'text-primary'
+    when '日'
+      'text-danger'
+    end
+  end
 end

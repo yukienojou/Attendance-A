@@ -34,6 +34,11 @@
       </td>
       <td><%= attendance.text_field :note, class: "form-control" %></td>
     </tr>
+      <% @dates.each do |day| %>
+       <tr>
+          <td><%= day.worked_on.to_s(:date) %></td>
+          <td><%= %w{日 月 火 水 木 金 土}[day.worked_on.wday] %></td>
+      </tr>
   <% end %>
 <% end %>
     </tbody>
