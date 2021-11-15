@@ -28,7 +28,6 @@ class AttendancesController < ApplicationController
   end
   
   def edit_one_month
-    
   end
   
   def update_one_month
@@ -52,11 +51,7 @@ class AttendancesController < ApplicationController
         redirect_to attendances_edit_one_month_user_url(date: params[:date]) and return
     end
   end
-
-  
-
-
-  private
+ private
     
     def attendances_params
       params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
