@@ -58,6 +58,14 @@ class UsersController < ApplicationController
     end
     redirect_to users_url
   end
+  
+  def self.search(search)
+      if search
+       User.where(['name LIKE ?', "%#{search}%"])
+      else
+        User.all
+      end
+  end
 
   private
 
