@@ -7,8 +7,10 @@ class UsersController < ApplicationController
   before_action :admin_or_correct, only: :show
   
   def index
-    @users = User.paginate(page: params[:page], per_page: 20)
+    @users = User.search(params[:search],paginate(page: params[:page], per_page: 20)
   end
+  
+
 
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
@@ -59,13 +61,6 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
-  def self.search(search)
-      if search
-       User.where(['name LIKE ?', "%#{search}%"])
-      else
-        User.all
-      end
-  end
 
   private
 
@@ -90,4 +85,5 @@ class UsersController < ApplicationController
         redirect_to(root_url)
       end  
     end
+  
 end
