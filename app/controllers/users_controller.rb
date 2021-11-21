@@ -7,9 +7,8 @@ class UsersController < ApplicationController
   before_action :admin_or_correct, only: :show
   
   def index
-    @users = User.search(params[:search],paginate(page: params[:page], per_page: 20)
+    @users = User.search(params[:search]),paginate(page: params[:page], per_page: 20)
   end
-  
 
 
   def show
@@ -85,5 +84,4 @@ class UsersController < ApplicationController
         redirect_to(root_url)
       end  
     end
-  
-end
+ end
