@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
+    Time.current.floor_to(15.minutes)
   end
 
   def new
