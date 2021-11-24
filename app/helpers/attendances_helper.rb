@@ -6,7 +6,7 @@ module AttendancesHelper
       return '退勤' if attendance.started_at.present? && attendance.finished_at.nil?
       
     end
-    return false
+   false
   end
   def attendances_invalid?
     attendances = true
