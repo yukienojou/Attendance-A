@@ -28,6 +28,7 @@ class AttendancesController < ApplicationController
   end
   
   def edit_one_month
+   
   end
   
   def update_one_month
@@ -43,7 +44,7 @@ class AttendancesController < ApplicationController
         redirect_to attendances_edit_one_month_user_url(date: params[:date]) and return
         
       
-    end
+      end
   end
     flash[:success] = "１ヶ月分の勤怠情報を更新しました。"
     redirect_to user_url(date:params[:date]) and return
