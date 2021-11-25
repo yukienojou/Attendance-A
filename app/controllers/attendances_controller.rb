@@ -12,13 +12,13 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     
     if @attendance.started_at.nil?
-      if @attendance.update_attributes(started_at: Time.current.floor_to(15.minutes))
+      if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
         flash[:info] = "おはようございます！"
       else
         flash[:danger] = UPDATE_ERROR_MSG
       end
     elsif @attendance.finished_at.nil?
-      if @attendance.update_attributes(finished_at: Time.current.floor_to(15.minutes))
+      if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
         flash[:info] = "お疲れ様でした。"
       else
        flash[:danger] = UPDATE_ERROR_MSG 
@@ -46,7 +46,8 @@ class AttendancesController < ApplicationController
     end
   rescue ActiveRecord::RecordInvalid
       flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
-      redirect_to attendances_edit_one_month_user_url(date: params[:date])
+      redirect_to 
+         attendances_edit_one_month_user_url(date: params[:date])
   end
   
 
