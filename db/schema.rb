@@ -31,7 +31,10 @@ ActiveRecord::Schema.define(version: 20211212120722) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
-    t.string "department"
+    t.string "department"Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
     t.datetime "basic_time", default: "2021-12-08 23:00:00"
     t.datetime "work_time", default: "2021-12-08 22:30:00"
     t.string "affiliation"
