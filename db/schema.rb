@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211212120722) do
+ActiveRecord::Schema.define(version: 20211213113759) do
 
   create_table "attendances", force: :cascade do |t|
     t.date "worked_on"
@@ -31,13 +31,16 @@ ActiveRecord::Schema.define(version: 20211212120722) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
-    t.string "department"Migrations are pending. To resolve this issue, run:
-
-        bin/rails db:migrate RAILS_ENV=development
-
-    t.datetime "basic_time", default: "2021-12-08 23:00:00"
-    t.datetime "work_time", default: "2021-12-08 22:30:00"
+    t.string "department"
+    t.datetime "basic_time", default: "2021-12-15 23:00:00"
+    t.datetime "work_time", default: "2021-12-15 22:30:00"
     t.string "affiliation"
+    t.string "employee_number"
+    t.string "uid"
+    t.datetime "basic_work_time"
+    t.datetime "designated_work_start_time"
+    t.datetime "designated_work_end_time"
+    t.boolean "superior"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
