@@ -10,7 +10,7 @@
   
   </div>
   <%= will_paginate %>
-   <% @users.each do |user| %>
+<% @users.each do |user| %>
     <p>
       <%= user.name %><br>
         |&nbsp<%= link_to "削除", user, method: :delete,data: { confirm: "#{user.name}を削除してよろしいですか？" },
