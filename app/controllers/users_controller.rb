@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :admin_or_correct, only: :show
   
   def index
-    @users = User.where.not(id: 1).search(params[:search]).paginate(page: params[:page], per_page: 20)
+    @users = User.where.not(id: 1).search(params[:search]).paginate(page: params[:page], per_page: 5)
   end
 
 
