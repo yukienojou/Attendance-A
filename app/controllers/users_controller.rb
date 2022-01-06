@@ -75,14 +75,15 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :affiliation, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :affiliation,:employee_number,:uid, :password, 
+        :password_confirmation, :basic_work_time, :designated_work_start_time, :designated_work_end_time)
     end
 
     def basic_info_params
       params.require(:user).permit(:affiliation, :basic_time, :work_time)
     end
     
-     # システム管理権限所有かどうか判定します。
+     # システム管理権https://so-zou.jp/web-app/text/fullwidth-halfwidth/限所有かどうか判定します。
     def admin_user
       redirect_to root_url unless current_user.admin?
     end
