@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+
   def User.digest(string)
     cost =
       if ActiveModel::SecurePassword.min_cost
@@ -50,7 +51,7 @@ class User < ApplicationRecord
       end
    end
   def self.import(file)
-    CSV.foreach(file.path, encoding: 'MS932:utf-8',headers: true) do |row|
+    CSV.foreach(file.path, encoding: 'Shift_JIS:utf-8',headers: true) do |row|
       user = find_by(id: row["id"]) || new
       user.attributes = row.to_hash.slice(*updatable_attributes)
       user.save!(:validation => false)
