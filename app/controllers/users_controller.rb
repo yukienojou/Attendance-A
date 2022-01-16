@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :update_index, :destroy, :edit_basic_info]
   before_action :logged_in_user, only: [:show, :update, :update_index, :destroy, :edit_basic_info]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:destroy,:index, :edit_basic_info, :update_basic_info]
+  before_action :admin_user, only: [:destroy,:index, :edit_basic_info, :working]
   before_action :set_one_month, only: :show
   before_action :admin_or_correct, only: :show
   
@@ -55,6 +55,11 @@ class UsersController < ApplicationController
   def edit
   end
 
+   def working 
+    # ユーザーモデルから全てのユーザーに紐づいた勤怠たちを代入
+    @users = User.all.includes(:attendances).where.not(id: 1)
+   end 
+   
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"
