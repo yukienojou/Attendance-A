@@ -58,8 +58,4 @@ class BasesController < ApplicationController
     def base_params
       params.require(:base).permit(:base_number,:base_name,:information)
     end
-   
-   
-
-end
 end

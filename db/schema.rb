@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211213113759) do
+ActiveRecord::Schema.define(version: 20220121140709) do
 
   create_table "attendances", force: :cascade do |t|
     t.date "worked_on"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20211213113759) do
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
+  create_table "bases", force: :cascade do |t|
+    t.integer "base_number"
+    t.string "base_name"
+    t.text "information"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bases_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -32,14 +42,14 @@ ActiveRecord::Schema.define(version: 20211213113759) do
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "department"
-    t.datetime "basic_time", default: "2022-01-08 23:00:00"
-    t.datetime "work_time", default: "2022-01-08 22:30:00"
+    t.datetime "basic_time", default: "2022-01-20 23:00:00"
+    t.datetime "work_time", default: "2022-01-20 22:30:00"
     t.string "affiliation"
     t.string "employee_number"
     t.string "uid"
-    t.datetime "basic_work_time", default: "2022-01-08 23:00:00"
-    t.datetime "designated_work_start_time", default: "2022-01-09 00:00:00"
-    t.datetime "designated_work_end_time", default: "2022-01-09 09:00:00"
+    t.datetime "basic_work_time", default: "2022-01-20 23:00:00"
+    t.datetime "designated_work_start_time", default: "2022-01-21 00:00:00"
+    t.datetime "designated_work_end_time", default: "2022-01-21 09:00:00"
     t.boolean "superior"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
