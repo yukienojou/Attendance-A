@@ -4,16 +4,18 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy,:index, :edit_basic_info, :working]
   before_action :set_one_month, only: :show
-  before_action :admin_or_correct, only: :show
+  before_action :admin_not, only: [:show,:verifacation]
   
   def index
     @users = User.where.not(id: 1).search(params[:search]).paginate(page: params[:page], per_page: 5)
+    
   end
 
 
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
-    
+    @superior = User.where(superior: true).where.not( id: current_user.id  )
+   
   end
 
   def new
@@ -98,10 +100,17 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def verifacation
+    @user = User.find(params[:id])
+    if @user.id == 1
+       flash[:danger] = "閲覧できません"
+      redirect_to root_url
+    end
+  end
 
   private
 
-    def user_params
+    def user_paams
       params.require(:user).permit(:name, :email, :affiliation,:employee_number,:uid, :password, 
         :password_confirmation, :basic_work_time, :designated_work_start_time, :designated_work_end_time)
     end
@@ -113,6 +122,10 @@ class UsersController < ApplicationController
      # システム管理権https://so-zou.jp/web-app/text/fullwidth-halfwidth/限所有かどうか判定します。
     def admin_user
       redirect_to root_url unless current_user.admin?
+    end
+    
+    def admin_not
+      redirect_to root_url if current_user.admin?  
     end
     
       # 管理権限者、または現在ログインしているユーザーを許可します。
