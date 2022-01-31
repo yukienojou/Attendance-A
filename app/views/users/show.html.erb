@@ -58,7 +58,7 @@
 
   <%= link_to "勤怠を編集",attendances_edit_one_month_user_path(date: @first_day),class: "btn btn-primary" %> &nbsp;
   <%= link_to "CSV出力",user_path(format: 'csv'),class: "btn btn-primary" %><br>
-  <!--<!%= link_to "勤怠修正ログ（承認済）",log_user_attendance_path(@user, @attendance),class: "btn btn-primary" %>-->
+  <%= link_to "勤怠修正ログ（承認済）",log_user_attendance_path(@user, @attendance),class: "btn btn-primary" %>
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
@@ -107,14 +107,14 @@
               %>
 
         <tr>
-          <!--<td><!%= link_to "残業申請", edit_overtime_request_user_attendance_path(@user,day), remote: true , class: "btn btn-primary" %></td>-->
+          <td><%= link_to "残業申請", edit_overtime_request_user_attendance_path(@user,day), remote: true , class: "btn btn-primary" %></td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td class="<%= css_class %>"><%= $days_of_the_week[day.worked_on.wday] %></td>
           <td><%= l(day.started_at,format: :hour) if day.started_at.present? %></td>
           <td><%= l(day.started_at,format: :minute) if day.started_at.present? %></td>
 
           <td>
-            <!--<!% if btn_text = attendance_state_start(day) %>-->
+            <% if btn_text = attendance_state_start(day) %>
               <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
@@ -221,4 +221,4 @@
 <div id= "edit-overtime-request" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-overtime-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-one-month-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<!--<div id="edit-month-approval-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>-->
+<div id="edit-month-approval-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
