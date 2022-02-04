@@ -33,7 +33,7 @@
 
 <div class="notice-group">
   <% if current_user.superior? %>
-    <% if @month >= 1  %>
+    <!--<!% if @month >= 1  %>-->
       <div class="red-group">
         <p><%= link_to  "【所属長承認申請のお知らせ】", edit_month_approval_notice_user_attendance_path(@user, @month), remote: true, class: "notice" %><span class="red_box"><%= "#{@month}件の通知があります"%></span></p>
       </div>    
