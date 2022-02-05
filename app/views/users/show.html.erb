@@ -34,31 +34,31 @@
 <div class="notice-group">
   <% if current_user.superior? %>
     <!--<!% if @month >= 1  %>-->
-      <div class="red-group">
-        <p><%= link_to  "【所属長承認申請のお知らせ】", edit_month_approval_notice_user_attendance_path(@user, @month), remote: true, class: "notice" %><span class="red_box"><%= "#{@month}件の通知があります"%></span></p>
-      </div>    
-      <% else %>
-      <p clas="notice">【所属長承認申請のお知らせ】</p>
-      <% end %> 
-<p></p>
-      <% if @change >= 1  %>
-        <div class="red-group">
-          <p><%= link_to  "【勤怠変更申請のお知らせ】", edit_one_month_notice_user_attendance_path(@user, @change), remote: true, class: "notice" %><span class="red_box"><%= "#{@change}件の通知があります"%></span></p>
-        </div>  
-      <% else %>
-        <p clas="notice">【勤怠変更申請のお知らせ】</p>
-      <% end %> 
-      <% if @overtime >= 1  %>
-        <p><%= link_to  "【残業申請のお知らせ】", edit_overtime_notice_user_attendance_path(@user, @overtime), remote: true, class: "notice" %><span class="red_box"><%= "#{@overtime}件の通知があります"%></span></p>
-      <% else %>
-        <p clas="notice">【残業申請のお知らせ】</p>
-      <% end %> 
-  <% end %>
+      <!--<div class="red-group">-->
+        <!--<p><!%= link_to  "【所属長承認申請のお知らせ】", edit_month_approval_notice_user_attendance_path(@user, @month), remote: true, class: "notice" %><span class="red_box"><%= "#{@month}件の通知があります"%></span></p>-->
+      <!--</div>    -->
+      <!--<!% else %>-->
+      <!--<p clas="notice">【所属長承認申請のお知らせ】</p>-->
+      <!--<!% end %> -->
+<!--<p></p>-->
+      <!--<!% if @change >= 1  %>-->
+        <!--<div class="red-group">-->
+          <!--<p><!%= link_to  "【勤怠変更申請のお知らせ】", edit_one_month_notice_user_attendance_path(@user, @change), remote: true, class: "notice" %><span class="red_box"><%= "#{@change}件の通知があります"%></span></p>-->
+        <!--</div>  -->
+      <!--<!% else %>-->
+        <!--<p clas="notice">【勤怠変更申請のお知らせ】</p>-->
+      <!--<!% end %> -->
+      <!--<!% if @overtime >= 1  %>-->
+        <!--<p><!%= link_to  "【残業申請のお知らせ】", edit_overtime_notice_user_attendance_path(@user, @overtime), remote: true, class: "notice" %><span class="red_box"><%= "#{@overtime}件の通知があります"%></span></p>-->
+      <!--<!% else %>-->
+        <!--<p clas="notice">【残業申請のお知らせ】</p>-->
+      <!--<!% end %> -->
+  <!--<!% end %>-->
 </div>
 
   <%= link_to "勤怠を編集",attendances_edit_one_month_user_path(date: @first_day),class: "btn btn-primary" %> &nbsp;
   <%= link_to "CSV出力",user_path(format: 'csv'),class: "btn btn-primary" %><br>
-  <%= link_to "勤怠修正ログ（承認済）",log_user_attendance_path(@user, @attendance),class: "btn btn-primary" %>
+  <!--<!%= link_to "勤怠修正ログ（承認済）",log_user_attendance_path(@user, @attendance),class: "btn btn-primary" %>-->
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
@@ -114,17 +114,17 @@
           <td><%= l(day.started_at,format: :minute) if day.started_at.present? %></td>
 
           <td>
-            <% if btn_text = attendance_state_start(day) %>
-              <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
-            <% end %>
+            <!--<!% if btn_text = attendance_state_start(day) %>-->
+              <!--<!%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>-->
+            <!--<!% end %>-->
           </td>
 
-          <td><%= l(day.finished_at,format: :hour) if day.finished_at.present? %></td>
+          <!--<td><!%= l(day.finished_at,format: :hour) if day.finished_at.present? %></td>-->
           <td><%= l(day.finished_at,format: :minute) if day.finished_at.present? %></td>
           <td>
             <% if btn_text = attendance_state_finish(day) %>
               <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
-            <% end %>
+            <!--<!% end %>-->
           </td>
           <td>
             <% if day.started_at.present? && day.finished_at.present? %>
@@ -221,4 +221,3 @@
 <div id= "edit-overtime-request" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-overtime-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-one-month-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
-<div id="edit-month-approval-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
