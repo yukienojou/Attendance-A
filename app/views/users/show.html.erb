@@ -34,26 +34,26 @@
 <div class="notice-group">
   <% if current_user.superior? %>
     <!--<!% if @month >= 1  %>-->
-      <!--<div class="red-group">-->
+      <div class="red-group">
         <!--<p><!%= link_to  "【所属長承認申請のお知らせ】", edit_month_approval_notice_user_attendance_path(@user, @month), remote: true, class: "notice" %><span class="red_box"><%= "#{@month}件の通知があります"%></span></p>-->
-      <!--</div>    -->
+      </div>    
       <!--<!% else %>-->
-      <!--<p clas="notice">【所属長承認申請のお知らせ】</p>-->
+      <p clas="notice">【所属長承認申請のお知らせ】</p>
       <!--<!% end %> -->
-<!--<p></p>-->
+<p></p>
       <!--<!% if @change >= 1  %>-->
-        <!--<div class="red-group">-->
+        <div class="red-group">
           <!--<p><!%= link_to  "【勤怠変更申請のお知らせ】", edit_one_month_notice_user_attendance_path(@user, @change), remote: true, class: "notice" %><span class="red_box"><%= "#{@change}件の通知があります"%></span></p>-->
-        <!--</div>  -->
+        </div>  
       <!--<!% else %>-->
-        <!--<p clas="notice">【勤怠変更申請のお知らせ】</p>-->
+        <p clas="notice">【勤怠変更申請のお知らせ】</p>
       <!--<!% end %> -->
       <!--<!% if @overtime >= 1  %>-->
         <!--<p><!%= link_to  "【残業申請のお知らせ】", edit_overtime_notice_user_attendance_path(@user, @overtime), remote: true, class: "notice" %><span class="red_box"><%= "#{@overtime}件の通知があります"%></span></p>-->
       <!--<!% else %>-->
-        <!--<p clas="notice">【残業申請のお知らせ】</p>-->
+        <p clas="notice">【残業申請のお知らせ】</p>
       <!--<!% end %> -->
-  <!--<!% end %>-->
+  <% end %>
 </div>
 
   <%= link_to "勤怠を編集",attendances_edit_one_month_user_path(date: @first_day),class: "btn btn-primary" %> &nbsp;
@@ -119,11 +119,11 @@
             <!--<!% end %>-->
           </td>
 
-          <!--<td><!%= l(day.finished_at,format: :hour) if day.finished_at.present? %></td>-->
+          <td><%= l(day.finished_at,format: :hour) if day.finished_at.present? %></td>
           <td><%= l(day.finished_at,format: :minute) if day.finished_at.present? %></td>
           <td>
-            <% if btn_text = attendance_state_finish(day) %>
-              <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <!--<!% if btn_text = attendance_state_finish(day) %>-->
+              <!--<!%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>-->
             <!--<!% end %>-->
           </td>
           <td>
@@ -197,15 +197,15 @@
               <%= f.hidden_field :indicater_reply_month, :value => "申請中" %>
               <%= f.hidden_field :month_approval, :value => @first_day %>
               <div class="form-group">
-                <% if @attendance.indicater_reply_month == "承認" %>
-                  <%= f.label :indicater_check_month, "所属長承認　#{@attendance.indicater_check_month}から承認済" %>
-                <% elsif @attendance.indicater_reply_month == "否認" %>
-                  <%= f.label :indicater_check_month, "所属長否認　#{@attendance.indicater_check_month}から否認済" %>
-                <% elsif @attendance.indicater_reply_month == "申請中" %>
-                  <%= f.label :indicater_check_month, "所属長承認　#{@attendance.indicater_check_month}へ申請中" %>
-                <% else %>  
+                <!--<!% if @attendance.indicater_reply_month == "承認" %>-->
+                  <!--<!%= f.label :indicater_check_month, "所属長承認　#{@attendance.indicater_check_month}から承認済" %>-->
+                <!--<!% elsif @attendance.indicater_reply_month == "否認" %>-->
+                  <!--<!%= f.label :indicater_check_month, "所属長否認　#{@attendance.indicater_check_month}から否認済" %>-->
+                <!--<!% elsif @attendance.indicater_reply_month == "申請中" %>-->
+                  <!--<!%= f.label :indicater_check_month, "所属長承認　#{@attendance.indicater_check_month}へ申請中" %>-->
+                <!--<!% else %>  -->
                   <%= f.label :indicater_check_month,"所属長承認 未" %>
-                <% end %>  
+                <!--<!% end %>  -->
                   <%= f.collection_select(:indicater_check_month, @superior, :name, :name, {prompt: "上長を選択して下さい"}, {class: "form-control input-sm"})%>
               </div>
               <div class="form-group">
@@ -221,3 +221,4 @@
 <div id= "edit-overtime-request" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-overtime-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <div id= "edit-one-month-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div id="edit-month-approval-notice" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
