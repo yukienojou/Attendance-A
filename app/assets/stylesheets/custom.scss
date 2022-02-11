@@ -2,8 +2,12 @@
 @import "bootstrap";
 
 /* universal */
+.bootstrap-date-only-width {
+  display: inline-block;
+  width: auto;
+}
 
-body{
+body {
   padding-top: 60px;
 }
 
@@ -48,7 +52,6 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
-  
 }
 
 /* header */
@@ -69,21 +72,18 @@ p {
   text-decoration: none;
 }
 
-/* debug */
 
 .debug_dump {
   clear: both;
   float: left;
   width: 100%;
   margin-top: 45px;
-  -moz-box-sizing:  border-box;
+  -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
 
-/* error_messages */
-
-#error_explanaion {
+#error_explanation {
   color: red;
   ul {
     color: red;
@@ -102,4 +102,76 @@ p {
 
 .modal-dialog-center {
   padding-top: 10%;
+}
+
+/* 基本情報編集モーダルウインドウ */
+
+.label-basic-info {
+  margin-top: 5px;
+}
+
+.btn-basic-info {
+  margin: 15px 0;
+  width: 30%;
+}
+
+
+/* 残業申請モーダルウインドウ */
+.overtime_request {
+  th {
+text-align: center;
+  } 
+  td {
+    text-align: center;
+  }
+}
+
+.line tr:nth-child(odd) td{
+  background: #f8f8f8;
+  text-align: center;
+}
+
+.maru {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.size_small{
+  width: 18px;
+  height: 18px;
+}
+.letter3 {
+  font-size: 0.7em;
+  line-height: 1.5em;
+}
+.black {
+  color: black;
+  border: 1px solid black;
+}
+// 残業申請お知らせモーダル
+.modal_notice {
+
+  th {
+text-align: center;
+  } 
+  td {
+    text-align: center;
+  }
+  
+}
+
+.center {
+
+  th {
+text-align: center;
+  } 
+  td {
+    text-align: center;
+  }
+  
+}
+
+.not_found{
+  text-align: center;
 }
