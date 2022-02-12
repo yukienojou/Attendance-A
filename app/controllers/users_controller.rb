@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:destroy,:index, :edit_basic_info, :working]
   before_action :set_one_month, only: :show
   before_action :admin_not, only: [:show,:verifacation]
+  before_action :correct_not, only: [:show]
+
   
   def index
     @users = User.where.not(id: 1).search(params[:search]).paginate(page: params[:page], per_page: 5)

@@ -29,7 +29,7 @@ class AttendancesController < ApplicationController
         if item[:indicater_reply].present?
           if (item[:change] == "1") && (item[:indicater_reply] == "なし" || item[:indicater_reply] == "承認" || item[:indicater_reply] == "否認")
             attendance = Attendance.find(id)
-            user = User.find(attendance.user_id)
+             user = User.find(attendance.user_id)
             if item[:indicater_reply] == "なし" 
               o1+= 1
               item[:overtime_finished_at] = nil
@@ -57,7 +57,7 @@ class AttendancesController < ApplicationController
           return
         end
       end
-      flash[:success] = "【残業申請】　#{o1}件なし,　#{o2}件承認,　#{o3}件否認しました"
+      flash[:success] = "【残業申請】 #{o1}件なし, #{o2}件承認, #{o3}件否認しました"
       redirect_to user_url(params[:user_id])
       return
     end
@@ -170,11 +170,11 @@ class AttendancesController < ApplicationController
         return
       end
     end
-  rescue ActiveRecord::RecordInvalid 
+ rescue ActiveRecord::RecordInvalid 
     flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
     return
-  end
+ end
   
   
 # 勤怠変更申請お知らせモーダル
@@ -197,7 +197,7 @@ class AttendancesController < ApplicationController
       if item[:indicater_reply_edit].present?
         if (item[:change_edit] == "1") && (item[:indicater_reply_edit] == "なし" || item[:indicater_reply_edit] == "承認" || item[:indicater_reply_edit] == "否認")
         attendance = Attendance.find(id)
-         user = User.find(attendance.user_id)
+         @user = User.find(attendance.user_id)
         if item[:indicater_reply_edit] == "なし" 
             e1+= 1
             item[:started_edit_at] = nil
@@ -205,8 +205,8 @@ class AttendancesController < ApplicationController
             item[:tomorrow] = nil
             item[:note] = nil
             item[:indicater_check_edit] = nil
-          elsif item[:indicater_reply_edit] == "承認"
-            if  attendance.started_before_at.blank?
+        elsif item[:indicater_reply_edit] == "承認"
+            if attendance.started_before_at.blank?
               item[:started_before_at] = attendance.started_at
             end 
             item[:started_at] = attendance.started_edit_at
@@ -217,7 +217,7 @@ class AttendancesController < ApplicationController
            #item[:indicater_check_edit] = nil
             e2 += 1          
             attendance.indicater_check_anser = "勤怠変更申請を承認しました"
-          elsif item[:indicater_reply_edit] == "否認"
+        elsif item[:indicater_reply_edit] == "否認"
             item[:started_edit_at] = nil
             item[:finished_edit_at] = nil
             item[:tomorrow] = nil
@@ -225,7 +225,7 @@ class AttendancesController < ApplicationController
             item[:indicater_check_edit] = nil
             e3 += 1
             attendance.indicater_check_edit_anser = "勤怠変更申請を否認しました"   
-          end          
+        end          
           attendance.update_attributes!(item)
         end
       else
@@ -234,7 +234,7 @@ class AttendancesController < ApplicationController
           return
       end
       end
-      flash[:success] = "【勤怠変更申請】　#{e1}件なし,　#{e2}件承認,　#{e3}件否認しました"
+      flash[:success] = "【勤怠変更申請】 #{e1}件なし, #{e2}件承認, #{e3}件否認しました"
       redirect_to user_url(params[:user_id])
       return
     end
@@ -272,7 +272,7 @@ def update_month_approval_notice
       if item[:indicater_reply_month].present?
         if (item[:change_month] == "1") && (item[:indicater_reply_month] == "なし" || item[:indicater_reply_month] == "承認" || item[:indicater_reply_month] == "否認")
         attendance = Attendance.find(id)
-        user = User.find(attendance.user_id)
+        @user = User.find(attendance.user_id)
           if item[:indicater_reply_month] == "なし" 
             a1+= 1
             item[:month_approval] = nil
@@ -287,21 +287,21 @@ def update_month_approval_notice
         attendance.indicater_check_month_anser = "1ヶ月分の勤怠を否認しました"
           end
           attendance.update_attributes!(item)
-          else 
+        else 
             flash[:danger] = "指示者確認を更新、または変更にチェックを入れて下さい"
             redirect_to user_url(params[:user_id])
             return
-          end
         end
       end
-      flash[:success] = "【1ヶ月の承認申請】　#{a1}件なし,　#{a2}件承認,　#{a3}件否認しました"
+      end
+      flash[:success] = "【1ヶ月の承認申請】 #{a1}件なし, #{a2}件承認, #{a3}件否認しました"
       redirect_to user_url(params[:user_id])
       return
     end
-    rescue ActiveRecord::RecordInvalid 
+rescue ActiveRecord::RecordInvalid 
       flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
       redirect_to edit_month_approval_notice_user_attendance_url(@user,item)
-  end
+end
 
   def log
     @user = User.find(params[:user_id])
@@ -346,15 +346,14 @@ def update_month_approval_notice
       def month_approval_params 
         # attendanceテーブルの（承認月,指示者確認、どの上長か）
         params.require(:user).permit(:month_approval, :indicater_reply_month, :indicater_check_month)
-    　 end
+      end
 
     # 1ヶ月承認申請お知らせモーダル
     def month_approval_notice_params
       # attendanceテーブルの（承認月,指示者確認、変更,どの上長か）
       params.require(:user).permit(attendances: [:month_approval, :indicater_reply_month, :change_month, :indicater_check_month])[:attendances]
     end
-
- 　 end   
+end
 
     # beforeフィルター
 
@@ -365,4 +364,4 @@ def update_month_approval_notice
     #     flash[:danger] = "編集権限がありません。"
     #     redirect_to(root_url)
     #   end  
-    # end
+
