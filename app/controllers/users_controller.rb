@@ -16,6 +16,9 @@ class UsersController < ApplicationController
 
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
+    @overtime = Attendance.where(indicater_reply: "申請中", indicater_check: @user.name).count
+    @change = Attendance.where(indicater_reply_edit: "申請中", indicater_check_edit: @user.name).count
+    @month = Attendance.where(indicater_reply_month: "申請中", indicater_check_month: @user.name).count
     @superior = User.where(superior: true).where.not( id: current_user.id  )
    
   end
@@ -107,6 +110,14 @@ class UsersController < ApplicationController
     if @user.id == 1
        flash[:danger] = "閲覧できません"
       redirect_to root_url
+    else  
+      
+    # お知らせモーダルの確認ボタンを押した時にparams[：worked_on]にday.worked_onを入れて飛ばしたので、それをfind_byで取り出している
+    @attendance = Attendance.find_by(worked_on: params[:worked_on])
+    @first_day = @attendance.worked_on.beginning_of_month
+    @last_day = @first_day.end_of_month
+    @attendances = @user.attendances.where(worked_on: @first_day..@last_day).order(:worked_on)
+    @worked_sum = @attendances.where.not(started_at: nil).count
     end
   end
 

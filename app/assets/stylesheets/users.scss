@@ -1,5 +1,31 @@
 /* ユーザー情報テーブル */
 
+p {
+  margin-bottom: 0px;
+}
+
+.notice-group {
+  margin-bottom: 20px;
+}
+
+.notice {
+color:red;
+
+}
+
+.red_box {
+  color:red;
+  padding: 0.2em 0.2em;
+  font-weight: bold;
+  border: solid 3px red
+  
+  }
+
+  .red-group {
+    margin-bottom: 10px;
+  }
+  
+/* ユーザー情報テーブル */
 .user-table {
   vertical-align: middle;
   text-align: center;
