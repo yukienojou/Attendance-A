@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20220213120515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "indicater_check_edit"
+    t.boolean "tomorrow_edit", default: false
+    t.datetime "started_edit_at"
+    t.datetime "started_before_at"
+    t.datetime "finished_before_at"
+    t.datetime "finished_edit_at"
+    t.boolean "change_edit", default: false
     t.string "indicater_check_month_anser"
     t.string "indicater_check_month"
     t.integer "indicater_reply_edit"
@@ -58,14 +64,14 @@ ActiveRecord::Schema.define(version: 20220213120515) do
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "department"
-    t.datetime "basic_time", default: "2022-02-19 23:00:00"
-    t.datetime "work_time", default: "2022-02-19 22:30:00"
+    t.datetime "basic_time", default: "2022-02-22 23:00:00"
+    t.datetime "work_time", default: "2022-02-22 22:30:00"
     t.string "affiliation"
     t.string "employee_number"
     t.string "uid"
-    t.datetime "basic_work_time", default: "2022-02-19 23:00:00"
-    t.datetime "designated_work_start_time", default: "2022-02-20 00:00:00"
-    t.datetime "designated_work_end_time", default: "2022-02-20 09:00:00"
+    t.datetime "basic_work_time", default: "2022-02-22 23:00:00"
+    t.datetime "designated_work_start_time", default: "2022-02-23 00:00:00"
+    t.datetime "designated_work_end_time", default: "2022-02-23 09:00:00"
     t.boolean "superior"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
