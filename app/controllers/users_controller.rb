@@ -20,7 +20,13 @@ class UsersController < ApplicationController
     @change = Attendance.where(indicater_reply_edit: "申請中", indicater_check_edit: @user.name).count
     @month = Attendance.where(indicater_reply_month: "申請中", indicater_check_month: @user.name).count
     @superior = User.where(superior: true).where.not( id: current_user.id  )
-   
+    @attendance = @user.attendances.find_by(worked_on: @first_day)
+    # csv 出力
+    respond_to do |format|
+      format.html 
+      filename = @user.name + ":" + l(@first_day, format: :middle) + "分" + " " + "勤怠"
+      format.csv { send_data render_to_string, type: 'text/csv; charset=shift_jis', filename: "#{filename}.csv" }  
+    end    
   end
 
   def new
