@@ -27,6 +27,14 @@ class ApplicationController < ActionController::Base
     end
    end
   
+  def correct_user_b
+    @user = User.find(params[:user_id])
+    unless current_user?(@user)
+      flash[:danger] = "他者のページは閲覧できません"
+      redirect_to(root_url) 
+    end
+  end 
+  
   def admin_user
     redirect_to root_url unless current_user.admin?
   end
