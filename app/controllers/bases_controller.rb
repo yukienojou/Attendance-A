@@ -24,7 +24,7 @@ class BasesController < ApplicationController
   
   def update
     # @base = Base.find(params[:id])
-    if @base.update_attributes(base_params)
+    if @base.update(base_params)
       flash[:success] = "拠点情報を更新しました。"
       redirect_to bases_url
     else

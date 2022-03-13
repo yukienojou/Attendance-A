@@ -49,7 +49,7 @@ class AttendancesController < ApplicationController
               o3 += 1
               attendance.indicater_check_anser = "残業申請を否認しました"
             end
-            attendance.update_attributes!(item)
+            attendance.update!(item)
           end
         else 
           flash[:danger] = "指示者確認を更新、または変更にチェックを入れて下さい"
@@ -76,7 +76,7 @@ class AttendancesController < ApplicationController
   def update_overtime_request
     @user = User.find(params[:user_id])
     @attendance = Attendance.find(params[:id])
-    if @attendance.update_attributes(overtime_params)
+    if @attendance.update(overtime_params)
       flash[:success] = "残業申請を受け付けました"
       redirect_to user_url(@user)
     end  
@@ -87,13 +87,13 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     # 出勤時間が未登録であることを判定します。
     if @attendance.started_at.nil?
-      if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
+      if @attendance.update(started_at: Time.current.change(sec: 0))
         flash[:info] = "おはようございます！"
       else
         flash[:danger] = UPDATE_ERROR_MSG
       end
     elsif @attendance.finished_at.nil?
-      if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
+      if @attendance.update(finished_at: Time.current.change(sec: 0))
         flash[:info] = "お疲れ様でした。"
       else
         flash[:danger] = UPDATE_ERROR_MSG
@@ -158,7 +158,7 @@ class AttendancesController < ApplicationController
             # end
             # カラム更新
             c1 += 1
-            @attendance.update_attributes!(item)
+            @attendance.update!(item)
           end
       end
       if c1 > 0
@@ -227,7 +227,7 @@ class AttendancesController < ApplicationController
             e3 += 1
             attendance.indicater_check_edit_anser = "勤怠変更申請を否認しました"   
         end          
-          attendance.update_attributes!(item)
+          attendance.update!(item)
         end
       else
           flash[:danger] = "指示者確認を更新、または変更にチェックを入れて下さい"
@@ -250,7 +250,7 @@ class AttendancesController < ApplicationController
       # パラメーター更新
       # mon = Date.strptime(@attendance.month_approval, format: :short2)
     if month_approval_params[:indicater_check_month].present?
-      @attendance.update_attributes(month_approval_params)
+      @attendance.update(month_approval_params)
       flash[:success] = "勤怠承認申請を受け付けました"
     else  
       flash[:danger] = "上長を選択して下さい"
@@ -287,7 +287,7 @@ def update_month_approval_notice
             a3+= 1
         attendance.indicater_check_month_anser = "1ヶ月分の勤怠を否認しました"
           end
-          attendance.update_attributes!(item)
+          attendance.update!(item)
         else 
             flash[:danger] = "指示者確認を更新、または変更にチェックを入れて下さい"
             redirect_to user_url(params[:user_id])

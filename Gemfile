@@ -11,6 +11,7 @@ gem 'puma',         '~> 3.7'
 gem 'sass-rails',   '~> 6'
 gem 'uglifier',     '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
+
 gem 'jquery-rails'
 gem 'turbolinks',   '~> 5'
 gem 'jbuilder',     '~> 2.5'
@@ -18,7 +19,7 @@ gem 'rounding'
 gem 'roo'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.13'
+  gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
